@@ -1,0 +1,38 @@
+<mvc:View controllerName="fiorinov.bps.controller.Parceiros"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Table 
+                
+                id="partnersTable"
+                items="{partnerInfos>/}">
+                <headerToolbar>
+                    <OverflowToolbar >
+                        <Title text="Business Partner"></Title>
+                        <ToolbarSpacer />
+                        <SearchField liveChange="onSearch" width="15rem"></SearchField>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="ID"/>
+                    </Column>
+                    <Column>
+                        <Text text="Nome"/>
+                    </Column>
+                    <Column>
+                        <Text text="Tipo"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active" press="onClick">
+                        <Text text="{partnerInfos>id}"/>
+                        <Text text="{partnerInfos>name}"/>
+                        <Text text="{partnerInfos>type}"/>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
