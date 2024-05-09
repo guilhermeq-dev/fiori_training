@@ -59,6 +59,11 @@
         }
       }
     },
+    "": {
+      "dataSource": "mainService",
+      "preload": true,
+      "settings": {}
+    },
     "resources": {
       "css": [
         {
@@ -92,7 +97,7 @@
           ]
         }
       ],
-      "targets": { 
+      "targets": {
         "TargetParceiros": {
           "viewType": "XML",
           "viewId": "Parceiros",

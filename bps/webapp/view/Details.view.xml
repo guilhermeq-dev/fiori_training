@@ -1,7 +1,7 @@
 <mvc:View controllerName="fiorinov.bps.controller.Details"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}" showHeader="true">
+    <Page id="page" title="ID #{partnerInfos>/partnerId}" showHeader="true">
         <content>
     
         </content>

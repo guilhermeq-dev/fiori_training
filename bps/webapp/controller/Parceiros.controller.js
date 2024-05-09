@@ -3,12 +3,13 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+    "../model/models"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, Filter, FilterOperator) {
+    function (Controller, JSONModel, Filter, FilterOperator, models) {
         "use strict";
 
         return Controller.extend("fiorinov.bps.controller.Parceiros", {
@@ -63,11 +64,11 @@ sap.ui.define([
                 oBinding.filter(aFilters)
             },
             onClick: function (oEvent) {
-                
+
                 const oRouter = this.getOwnerComponent().getRouter();
-                
+
                 const oContext = oEvent.getSource().getBindingContext('partnerInfos');
-                
+
                 const sPartnerID = oContext.getProperty('id');
 
                 oRouter.navTo("Details", {
