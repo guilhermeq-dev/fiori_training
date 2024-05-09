@@ -1,0 +1,9 @@
+<mvc:View controllerName="fiorinov.bps.controller.Details"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}" showHeader="true">
+        <content>
+    
+        </content>
+    </Page>
+</mvc:View>

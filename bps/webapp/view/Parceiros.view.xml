@@ -1,10 +1,9 @@
 <mvc:View controllerName="fiorinov.bps.controller.Parceiros"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    <Page id="page" title="{i18n>title}" showHeader="false">
         <content>
             <Table 
-                
                 id="partnersTable"
                 items="{partnerInfos>/}">
                 <headerToolbar>

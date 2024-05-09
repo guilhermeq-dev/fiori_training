@@ -63,8 +63,16 @@ sap.ui.define([
                 oBinding.filter(aFilters)
             },
             onClick: function (oEvent) {
+                
+                const oRouter = this.getOwnerComponent().getRouter();
+                
                 const oContext = oEvent.getSource().getBindingContext('partnerInfos');
-                console.log(oContext)
+                
+                const sPartnerID = oContext.getProperty('id');
+
+                oRouter.navTo("Details", {
+                    sPartnerId: sPartnerID
+                });
             }
         });
     });

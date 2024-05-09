@@ -72,9 +72,8 @@
         "viewType": "XML",
         "async": true,
         "viewPath": "fiorinov.bps.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
+        "controlId": "fcl",
+        "transition": "slide"
       },
       "routes": [
         {
@@ -83,15 +82,28 @@
           "target": [
             "TargetParceiros"
           ]
+        },
+        {
+          "name": "Details",
+          "pattern": "partner/{sPartnerId}",
+          "target": [
+            "TargetParceiros",
+            "TargetDetails"
+          ]
         }
       ],
-      "targets": {
+      "targets": { 
         "TargetParceiros": {
           "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
           "viewId": "Parceiros",
-          "viewName": "Parceiros"
+          "viewName": "Parceiros",
+          "controlAggregation": "beginColumnPages"
+        },
+        "TargetDetails": {
+          "viewType": "XML",
+          "viewId": "Details",
+          "viewName": "Details",
+          "controlAggregation": "midColumnPages"
         }
       }
     },

@@ -1,6 +1,11 @@
 <mvc:View controllerName="fiorinov.bps.controller.App"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <App id="app"></App>
+    xmlns="sap.f"
+    xmlns:m="sap.m">
+    <m:App id="app">
+        <FlexibleColumnLayout id="fcl" layout="{layout>/layout}" /> 
+        
+        <!-- layout="TwoColumnsMidExpanded" -->
+    </m:App>
 </mvc:View>
