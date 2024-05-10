@@ -38,16 +38,55 @@ sap.ui.define(
             id: "0002",
             name: "BRASTEMP",
             type: "Cliente",
+            infos: {
+              street: "Marina Formigas",
+              number: "132323244",
+              complement: "floor 7, apto 22",
+              city: "Bauru",
+              state: "SP",
+              country: "Brasil",
+              zipcode: "00000-000",
+              phone: "(11) 99999-9999",
+              email: "contato@lab.com",
+              site: "www.lab2dev.com.br",
+              cnpj: "00.000.000/0000-00",
+            }
           },
           {
             id: "0003",
             name: "EPI-USE",
-            type: "Consultoria SAP"
+            type: "Consultoria SAP",
+            infos: {
+              street: "Marina Rosinha",
+              number: "2323232",
+              complement: "floor 7, apto 22",
+              city: "Santana",
+              state: "SP",
+              country: "Brasil",
+              zipcode: "00000-000",
+              phone: "(11) 99999-9999",
+              email: "contato@lab.com",
+              site: "www.lab2dev.com.br",
+              cnpj: "00.000.000/0000-00",
+            }
           },
           {
             id: "0004",
             name: "MARABRAZ",
-            type: "Cliente"
+            type: "Cliente",
+            infos: {
+              street: "Marina Vista",
+              number: "32",
+              complement: "floor 7, apto 22",
+              city: "Barueri",
+              state: "SP",
+              country: "Brasil",
+              zipcode: "00000-000",
+              phone: "(11) 99999-9999",
+              email: "contato@lab.com",
+              site: "www.lab2dev.com.br",
+              cnpj: "00.000.000/0000-00",
+            }
           }
         ]
 
@@ -56,9 +95,7 @@ sap.ui.define(
         this.getView().setModel(oModel, "partnerInfos")
 
         const oRouter = this.getOwnerComponent().getRouter();
-        oRouter
-          .getRoute("Details")
-          .attachPatternMatched(this.sRouteDetails, this);
+        oRouter.getRoute("Details").attachPatternMatched(this.sRouteDetails, this);
 
       },
       sRouteDetails: function (oEvent) {
@@ -66,8 +103,9 @@ sap.ui.define(
         const oModel = this.getView().getModel('partnerInfos')
         const oDataModel = oModel.getData();
         const oPartner = oDataModel.find((partner) => partner.id === oArgs.sPartnerId)
-        oModel.setProperty('/partnerId', oArgs.sPartnerId);
         oModel.setProperty('/partnerDetails', oPartner);
+        oModel.setProperty('/partnerId', oArgs.sPartnerId);
+
       },
       openEditData: function () {
         if (!this.sDialog) {
@@ -79,7 +117,9 @@ sap.ui.define(
         }
         const oModel = this.getView().getModel('partnerInfos').getData();
         const currentModel = oModel.partnerDetails
-        const oEditModel = new JSONModel(currentModel);
+        const currentData = {};
+        Object.assign(currentData, currentModel);
+        const oEditModel = new JSONModel(currentData);
         this.getView().setModel(oEditModel, "editData");
 
         this.sDialog.open();
@@ -88,7 +128,27 @@ sap.ui.define(
         this.sDialog.close();
       },
       onEditData: function () {
-        debugger
+        const oEditData = this.getView().getModel("editData").getData();
+        const oModel = this.getView().getModel('partnerInfos');
+        const oPartnerId = oModel.getProperty("/partnerId");
+        const oPartnerDetails = oModel.getProperty("/partnerDetails");
+
+        if (oPartnerDetails && oPartnerDetails.id === oPartnerId) {
+          oModel.setProperty("/partnerDetails", oEditData);
+        }
+
+        // const oDataModel = oModel.getData();
+        // const updatedPartners = oDataModel.map(partner => {
+        //   if (partner.id === oPartnerId) {
+        //     return partner.infos = oEditData;
+        //   }
+        //   return partner;
+        // });
+
+        // oModel.setData(updatedPartners);
+
+        this.sDialog.close();
+
       }
     });
   }
