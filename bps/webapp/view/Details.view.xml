@@ -1,9 +1,52 @@
 <mvc:View controllerName="fiorinov.bps.controller.Details"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
     <Page id="page" title="ID #{partnerInfos>/partnerId}" showHeader="true">
         <content>
-    
+            <VBox >
+                <f:SimpleForm 
+                            id="SimpleFormDisplay354"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            title="Dados do Parceiro"
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="4"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false" >
+                    <f:content>
+                        <Label text="Nome do Parceiro"></Label>
+                        <Text class="sapUiSmallMarginBottom" text="{partnerInfos>/partnerDetails/name}"></Text>
+                        <Label text="Tipo de Parceiro"></Label>
+                        <Text class="sapUiSmallMarginBottom" text="{partnerInfos>/partnerDetails/type}"></Text>
+                        <Label text="Rua" />
+                        <Text class="sapUiSmallMarginBottom" text="{partnerInfos>/partnerDetails/infos/street}"  />
+                        <Label text="Numero" />
+                        <Text class="sapUiSmallMarginBottom" text="{partnerInfos>/partnerDetails/infos/number}"  />
+                        <Label text="Cidade" />
+                        <Text class="sapUiSmallMarginBottom" text="{partnerInfos>/partnerDetails/infos/city}"  />
+                        <Label text="Estado" />
+                        <Text class="sapUiSmallMarginBottom" text="{partnerInfos>/partnerDetails/infos/state}"  />
+                        <Label text="CEP" />
+                        <Text class="sapUiSmallMarginBottom" text="{partnerInfos>/partnerDetails/infos/zipcode}"  />
+                        <Label text="País" />
+                        <Text class="sapUiSmallMarginBottom" text="{partnerInfos>/partnerDetails/infos/country}"  />
+                    </f:content>
+			    </f:SimpleForm>
+                <Toolbar >
+                    <ToolbarSpacer ></ToolbarSpacer>
+                    <Button type="Emphasized" text="Editar dados" press="openEditData"></Button>
+                </Toolbar>
+            </VBox>
         </content>
     </Page>
 </mvc:View>

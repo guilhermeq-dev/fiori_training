@@ -19,12 +19,25 @@ sap.ui.define(
           {
             id: "0001",
             name: "Lab2dev",
-            type: "Consultoria SAP"
+            type: "Consultoria SAP",
+            infos: {
+              street: "Marina Cretti",
+              number: "1",
+              complement: "floor 7, apto 22",
+              city: "Osasco",
+              state: "SP",
+              country: "Brasil",
+              zipcode: "00000-000",
+              phone: "(11) 99999-9999",
+              email: "contato@lab.com",
+              site: "www.lab2dev.com.br",
+              cnpj: "00.000.000/0000-00",
+            }
           },
           {
             id: "0002",
             name: "BRASTEMP",
-            type: "Cliente"
+            type: "Cliente",
           },
           {
             id: "0003",
@@ -49,12 +62,34 @@ sap.ui.define(
 
       },
       sRouteDetails: function (oEvent) {
-
         const oArgs = oEvent.getParameter('arguments')
         const oModel = this.getView().getModel('partnerInfos')
-        oModel.setProperty('/partnerId', oArgs.sPartnerId)
-
+        const oDataModel = oModel.getData();
+        const oPartner = oDataModel.find((partner) => partner.id === oArgs.sPartnerId)
+        oModel.setProperty('/partnerId', oArgs.sPartnerId);
+        oModel.setProperty('/partnerDetails', oPartner);
       },
+      openEditData: function () {
+        if (!this.sDialog) {
+          this.sDialog = sap.ui.xmlfragment(
+            "fiorinov.bps.view.fragments.EditData",
+            this
+          );
+          this.getView().addDependent(this.sDialog);
+        }
+        const oModel = this.getView().getModel('partnerInfos').getData();
+        const currentModel = oModel.partnerDetails
+        const oEditModel = new JSONModel(currentModel);
+        this.getView().setModel(oEditModel, "editData");
+
+        this.sDialog.open();
+      },
+      onCloseEdit: function () {
+        this.sDialog.close();
+      },
+      onEditData: function () {
+        debugger
+      }
     });
   }
 );

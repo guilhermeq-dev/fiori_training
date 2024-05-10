@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns:m="sap.m"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core">
+  <m:Dialog id="formDialog" showHeader="true" title="Editar dados" contentWidth="700px" contentHeight="210px">
+    <m:content>
+      <m:VBox id="formContainer">
+        <f:SimpleForm id="SimpleFormChangeColumn_twoGroups234" editable="true" layout="ColumnLayout" labelSpanXL="12" labelSpanL="12" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsM="2" columnsL="2" columnsXL="2">
+          <f:content>
+            <m:Label required="true" text="Rua" />
+            <m:Input id="teste" required="true" value="{editData>/infos/street}" placeholder="Texto" />
+            <m:Label required="true" text="Número" />
+            <m:Input required="true" value="{editData>/infos/number}" placeholder="Texto"/>
+            <m:Label required="true" text="Cidade" />
+            <m:Input required="true" value="{editData>/infos/city}" placeholder="Texto"/>
+            <m:Label required="true" text="Estado" />
+            <m:Input required="true" value="{editData>/infos/state}" placeholder="Texto"/>
+            <m:Label required="true" text="CEP" />
+            <m:Input required="true" value="{editData>/infos/zipcode}" placeholder="Texto"/>
+            <m:Label required="true" text="País" />
+            <m:Input required="true" value="{editData>/infos/country}" placeholder="Texto"/>
+          </f:content>
+        </f:SimpleForm>
+      </m:VBox>
+    </m:content>
+    <m:footer>
+      <m:Toolbar>
+        <m:content>
+          <m:ToolbarSpacer />
+          <m:Button text="Salvar Alterações" press="onEditData" type="Emphasized" />
+          <m:Button text="Cancelar" press="onCloseEdit" type="Ghost" />
+        </m:content>
+      </m:Toolbar>
+    </m:footer>
+  </m:Dialog>
+</core:FragmentDefinition>
