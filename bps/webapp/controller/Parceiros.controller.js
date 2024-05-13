@@ -16,22 +16,22 @@ sap.ui.define([
             onInit: function () {
                 const oPartners = [
                     {
-                        id: "0001",
+                        id: 1,
                         name: "Lab2dev",
                         type: "Consultoria SAP"
                     },
                     {
-                        id: "0002",
+                        id: 2,
                         name: "BRASTEMP",
                         type: "Cliente"
                     },
                     {
-                        id: "0003",
+                        id: 3,
                         name: "EPI-USE",
                         type: "Consultoria SAP"
                     },
                     {
-                        id: "0004",
+                        id: 4,
                         name: "MARABRAZ",
                         type: "Cliente"
                     }
@@ -43,27 +43,27 @@ sap.ui.define([
             },
             onSearch: function (oEvent) {
 
-                const sValue = oEvent.getParameter('newValue');
+                const sValue = oEvent.getSource().getValue();
+                const aFilters = [];
+
+                if (sValue && sValue.length > 0) {
+                    const oFilter = new Filter({
+                        filters: [
+                            new Filter('id', FilterOperator.EQ, sValue),
+                            new Filter('name', FilterOperator.Contains, sValue),
+                            new Filter('type', FilterOperator.Contains, sValue)
+                        ],
+                    });
+                    aFilters.push(oFilter);
+                }
 
                 const oTable = this.getView().byId('partnersTable');
 
                 const oBinding = oTable.getBinding('items')
 
-                const aFilters = [];
-
-                const oFilter = new Filter({
-                    filters: [
-                        new Filter('id', FilterOperator.Contains, sValue),
-                        new Filter('name', FilterOperator.Contains, sValue),
-                        new Filter('type', FilterOperator.Contains, sValue)
-                    ],
-                });
-
-                aFilters.push(oFilter);
-
                 oBinding.filter(aFilters)
             },
-            onClick: function (oEvent) {
+            onNav: function (oEvent) {
 
                 const oRouter = this.getOwnerComponent().getRouter();
 
@@ -74,6 +74,45 @@ sap.ui.define([
                 oRouter.navTo("Details", {
                     sPartnerId: sPartnerID
                 });
+            },
+            onAddPartner: function () {
+                if (!this.sDialog) {
+                    this.sDialog = sap.ui.xmlfragment(
+                        "fiorinov.bps.view.fragments.AddPartner",
+                        this
+                    );
+                    this.getView().addDependent(this.sDialog);
+                }
+
+                const newPartner = {
+                    name: "",
+                    type: ""
+                }
+
+                const oModel = new JSONModel(newPartner);
+
+                this.getView().setModel(oModel, "addPartner");
+
+                this.sDialog.open();
+            },
+            onCloseDialog: function () {
+                this.sDialog.close();
+            },
+            onSendFormData: function () {
+                const oAddPartner = this.getView().getModel("addPartner").getData();
+                const oModel = this.getView().getModel('partnerInfos').getData();
+
+                const oNewPartner = [
+                    ...oModel,
+                    {
+                        id: oModel[oModel.length - 1].id + 1,
+                        ...oAddPartner
+                    }
+                ];
+
+                this.getView().getModel("partnerInfos").setData(oNewPartner);
+
+                this.sDialog.close();
             }
         });
     });

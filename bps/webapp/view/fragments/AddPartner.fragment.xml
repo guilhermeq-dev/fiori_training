@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns:m="sap.m"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core">
+  <m:Dialog id="addData" showHeader="true" title="Adicionar parceiro" contentWidth="200px">
+    <m:content>
+      <m:VBox>
+        <f:SimpleForm editable="true" layout="ColumnLayout" labelSpanXL="12" labelSpanL="12" labelSpanM="3" labelSpanS="12" adjustLabelSpan="true" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsM="2" columnsL="2" columnsXL="2">
+          <f:content>
+            <m:Label required="true" text="Nome do parceiro" />
+            <m:Input required="true" value="{addPartner>/name}" placeholder="Texto" />
+            <m:Label required="true" text="Tipo do parceiro" />
+            <m:Input required="true" value="{addPartner>/type}" placeholder="Texto"/>
+          </f:content>
+        </f:SimpleForm>
+      </m:VBox>
+    </m:content>
+    <m:footer>
+      <m:Toolbar>
+        <m:content>
+          <m:ToolbarSpacer />
+          <m:Button text="Enviar dados" press="onSendFormData" type="Emphasized" />
+          <m:Button text="Cancelar" press="onCloseDialog" type="Ghost" />
+        </m:content>
+      </m:Toolbar>
+    </m:footer>
+  </m:Dialog>
+</core:FragmentDefinition>

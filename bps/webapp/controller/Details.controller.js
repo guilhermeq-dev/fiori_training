@@ -17,7 +17,7 @@ sap.ui.define(
       onInit: function () {
         const oPartners = [
           {
-            id: "0001",
+            id: 1,
             name: "Lab2dev",
             type: "Consultoria SAP",
             infos: {
@@ -35,12 +35,12 @@ sap.ui.define(
             }
           },
           {
-            id: "0002",
+            id: 2,
             name: "BRASTEMP",
             type: "Cliente",
             infos: {
-              street: "Marina Formigas",
-              number: "132323244",
+              street: "Jose Formigas",
+              number: "1323",
               complement: "floor 7, apto 22",
               city: "Bauru",
               state: "SP",
@@ -53,12 +53,12 @@ sap.ui.define(
             }
           },
           {
-            id: "0003",
+            id: 3,
             name: "EPI-USE",
             type: "Consultoria SAP",
             infos: {
-              street: "Marina Rosinha",
-              number: "2323232",
+              street: "Rosa Rosinha",
+              number: "232",
               complement: "floor 7, apto 22",
               city: "Santana",
               state: "SP",
@@ -71,11 +71,11 @@ sap.ui.define(
             }
           },
           {
-            id: "0004",
+            id: 4,
             name: "MARABRAZ",
             type: "Cliente",
             infos: {
-              street: "Marina Vista",
+              street: "Brunula Vista",
               number: "32",
               complement: "floor 7, apto 22",
               city: "Barueri",
@@ -102,7 +102,7 @@ sap.ui.define(
         const oArgs = oEvent.getParameter('arguments')
         const oModel = this.getView().getModel('partnerInfos')
         const oDataModel = oModel.getData();
-        const oPartner = oDataModel.find((partner) => partner.id === oArgs.sPartnerId)
+        const oPartner = oDataModel.find((partner) => partner.id == oArgs.sPartnerId)
         oModel.setProperty('/partnerDetails', oPartner);
         oModel.setProperty('/partnerId', oArgs.sPartnerId);
 
@@ -133,7 +133,7 @@ sap.ui.define(
         const oPartnerId = oModel.getProperty("/partnerId");
         const oPartnerDetails = oModel.getProperty("/partnerDetails");
 
-        if (oPartnerDetails && oPartnerDetails.id === oPartnerId) {
+        if (oPartnerDetails && oPartnerDetails.id == oPartnerId) {
           oModel.setProperty("/partnerDetails", oEditData);
         }
 
@@ -149,6 +149,10 @@ sap.ui.define(
 
         this.sDialog.close();
 
+      },
+      onBackHome: function () {
+        const oRouter = this.getOwnerComponent().getRouter();
+        oRouter.navTo("RouteParceiros");
       }
     });
   }

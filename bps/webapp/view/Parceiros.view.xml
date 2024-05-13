@@ -25,7 +25,7 @@
                     </Column>
                 </columns>
                 <items>
-                    <ColumnListItem type="Active" press="onClick">
+                    <ColumnListItem type="Active" press="onNav">
                         <Text text="{partnerInfos>id}"/>
                         <Text text="{partnerInfos>name}"/>
                         <Text text="{partnerInfos>type}"/>
@@ -33,5 +33,15 @@
                 </items>
             </Table>
         </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    type="Emphasized"
+                    text="Adicionar parceiro"
+                    press="onAddPartner"
+                />
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>
