@@ -5,12 +5,14 @@
         <content>
             <Table 
                 id="partnersTable"
-                items="{partnerInfos>/}">
+                items="{partnerInfos>/}"
+                >
                 <headerToolbar>
                     <OverflowToolbar >
-                        <Title text="Business Partner"></Title>
+                        <Title text="Parceiros ({partnerInfos>/totalCount})"></Title>
                         <ToolbarSpacer />
                         <SearchField liveChange="onSearch" width="15rem"></SearchField>
+                        <Button icon="sap-icon://add" press="onAddPartner" tooltip="Adicionar parceiro"></Button>
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>
@@ -38,8 +40,10 @@
                 <ToolbarSpacer />
                 <Button
                     type="Emphasized"
-                    text="Adicionar parceiro"
-                    press="onAddPartner"
+                    icon="sap-icon://excel-attachment"
+                    iconFirst="false"
+                    text="Exportar excel"
+                    press="onExportExcel"
                 />
             </OverflowToolbar>
         </footer>

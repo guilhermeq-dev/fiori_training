@@ -4,13 +4,17 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "../model/models"
+    "../model/models",
+    "sap/ui/export/library",
+    "sap/ui/export/Spreadsheet"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, Filter, FilterOperator, models) {
+    function (Controller, JSONModel, Filter, FilterOperator, models, exportLibrary, Spreadsheet) {
         "use strict";
+
+        const EdmType = exportLibrary.EdmType;
 
         return Controller.extend("fiorinov.bps.controller.Parceiros", {
             onInit: function () {
@@ -37,12 +41,12 @@ sap.ui.define([
                     }
                 ]
 
-
                 const oModel = new JSONModel(oPartners)
                 this.getView().setModel(oModel, "partnerInfos")
+                const oDataCount = oModel.getData();
+                oModel.setProperty('/totalCount', oDataCount.length)
             },
             onSearch: function (oEvent) {
-
                 const sValue = oEvent.getSource().getValue();
                 const aFilters = [];
 
@@ -62,6 +66,9 @@ sap.ui.define([
                 const oBinding = oTable.getBinding('items')
 
                 oBinding.filter(aFilters)
+
+                const oViewDetailsModel = this.getView().getModel("partnerInfos");
+                oViewDetailsModel.setProperty("/totalCount", oBinding.getLength());
             },
             onNav: function (oEvent) {
 
@@ -112,7 +119,51 @@ sap.ui.define([
 
                 this.getView().getModel("partnerInfos").setData(oNewPartner);
 
+                this.getView().getModel("partnerInfos").setProperty('/totalCount', oNewPartner.length);
+
                 this.sDialog.close();
-            }
+            },
+            _createColumnsConfig: function () {
+                return [
+                    {
+                        label: "ID",
+                        property: "id",
+                        width: 15,
+                        type: EdmType.String
+                    },
+                    {
+                        label: "Nome do parceiro",
+                        property: "name",
+                        width: 30,
+                        type: EdmType.String
+                    },
+                    {
+                        label: "Tipo do parceiro",
+                        property: "type",
+                        width: 25,
+                        type: EdmType.String
+                    }
+                ]
+
+            },
+            onExportExcel: function () {
+                const oTable = this.byId("partnersTable")
+
+                const aRows = oTable.getBinding('items')
+                const aCols = this._createColumnsConfig()
+
+                const oSettings = {
+                    workbook: {
+                        columns: aCols,
+                    },
+                    dataSource: aRows,
+                    fileName: 'BP Details',
+                }
+
+                const oSheet = new Spreadsheet(oSettings);
+                oSheet.build().finally(function () {
+                    oSheet.destroy();
+                });
+            },
         });
     });
