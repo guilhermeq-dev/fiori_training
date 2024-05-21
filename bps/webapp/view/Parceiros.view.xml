@@ -39,10 +39,10 @@
             <OverflowToolbar>
                 <ToolbarSpacer />
                 <Button
-                    type="Emphasized"
+                    type="Accept"
                     icon="sap-icon://excel-attachment"
                     iconFirst="false"
-                    text="Exportar excel"
+                    text="Exportar p/ excel"
                     press="onExportExcel"
                 />
             </OverflowToolbar>

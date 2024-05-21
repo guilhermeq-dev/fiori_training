@@ -95,10 +95,10 @@ sap.ui.define(
         this.getView().setModel(oModel, "partnerInfos")
 
         const oRouter = this.getOwnerComponent().getRouter();
-        oRouter.getRoute("Details").attachPatternMatched(this.sRouteDetails, this);
+        oRouter.getRoute("Details").attachPatternMatched(this.onRouteMatchedDetails, this);
 
       },
-      sRouteDetails: function (oEvent) {
+      onRouteMatchedDetails: function (oEvent) {
         const oArgs = oEvent.getParameter('arguments')
         const oModel = this.getView().getModel('partnerInfos')
         const oDataModel = oModel.getData();
