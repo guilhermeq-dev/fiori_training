@@ -109,10 +109,12 @@ sap.ui.define([
                 const oAddPartner = this.getView().getModel("addPartner").getData();
                 const oModel = this.getView().getModel('partnerInfos').getData();
 
+                const newId = oModel.length ? oModel[oModel.length - 1].id + 1 : 1;
+
                 const oNewPartner = [
                     ...oModel,
                     {
-                        id: oModel[oModel.length - 1].id + 1,
+                        id: newId,
                         ...oAddPartner
                     }
                 ];
@@ -165,5 +167,18 @@ sap.ui.define([
                     oSheet.destroy();
                 });
             },
+            onPressDelete: function (oEvent) {
+                const oModel = this.getView().getModel('partnerInfos');
+                const oData = oModel.getData(); 
+                const sPath = oEvent.getSource().getBindingContext('partnerInfos').getPath();
+                const iIndex = parseInt(sPath.split('/').pop());
+
+                oData.splice(iIndex, 1);
+
+                oModel.setData(oData);
+                
+                const oDataCount = oModel.getData();
+                oModel.setProperty('/totalCount', oDataCount.length)
+            }
         });
     });

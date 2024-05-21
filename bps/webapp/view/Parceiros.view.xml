@@ -1,4 +1,4 @@
-<mvc:View controllerName="fiorinov.bps.controller.Parceiros"
+<mvc:View xmlns:core="sap.ui.core" controllerName="fiorinov.bps.controller.Parceiros"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}" showHeader="false">
@@ -25,12 +25,16 @@
                     <Column>
                         <Text text="Tipo"/>
                     </Column>
+                    <Column hAlign="End">
+                        <Text text=""/>
+                    </Column>
                 </columns>
                 <items>
                     <ColumnListItem type="Active" press="onNav">
                         <Text text="{partnerInfos>id}"/>
                         <Text text="{partnerInfos>name}"/>
                         <Text text="{partnerInfos>type}"/>
+                        <core:Icon press="onPressDelete" src="sap-icon://delete"></core:Icon>
                     </ColumnListItem>
                 </items>
             </Table>
